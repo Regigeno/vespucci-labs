@@ -329,7 +329,7 @@ export class Terminal {
       this.contactTime.textContent = "NO ACTIVE CONTACT";
     }
     const progress = v.linkProgress / v.linkHold;
-    this.holdButton.disabled = contact === null;
+    this.holdButton.classList.toggle("idle", contact === null);
     this.holdButton.classList.toggle("holding", v.linkProgress > 0);
     this.holdFill.style.width = `${progress * 100}%`;
     this.holdLabel.textContent = v.linkProgress > 0 ? `MAINTAINING LINK · ${Math.max(0, v.linkHold - v.linkProgress).toFixed(1)}s` : "HOLD TO MAINTAIN LINK";

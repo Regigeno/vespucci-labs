@@ -1812,12 +1812,11 @@ button {
   touch-action: none;
 }
 
-.hold-button:disabled {
+.hold-button.idle {
   opacity: 0.3;
-  cursor: not-allowed;
 }
 
-.hold-button:not(:disabled):hover {
+.hold-button:not(.idle):hover {
   background: rgba(169, 240, 207, 0.12);
 }
 
