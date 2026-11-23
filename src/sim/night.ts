@@ -97,6 +97,11 @@ export class NightSim {
     return this.state.gpt.linkProgress > 0;
   }
 
+  /** Push the next GPT contact back, e.g. so Amos can finish the walkthrough before the first call. */
+  deferNextContact(seconds: number): void {
+    if (!this.state.gpt.contact) this.state.gpt.nextContactAt += seconds;
+  }
+
   /** Advance the night. Large deltas are split into fixed steps so a fast-forward never skips a rule. */
   tick(dt: number, input: NightInput): SimEvent[] {
     const events: SimEvent[] = [];
