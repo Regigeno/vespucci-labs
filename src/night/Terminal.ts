@@ -203,8 +203,8 @@ export class Terminal {
           this.lockBanner,
         ]),
         el("div", "crt-glass"),
+        lower,
       ]),
-      lower,
     ]);
     this.applyPage();
   }

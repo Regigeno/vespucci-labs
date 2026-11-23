@@ -18,7 +18,7 @@ body {
   margin: 0;
   height: 100%;
   background: #000;
-  overflow: hidden;
+  overflow: clip;
   color: var(--paper);
   font-family: var(--ui);
   -webkit-font-smoothing: antialiased;
@@ -28,6 +28,11 @@ body {
 #app {
   position: fixed;
   inset: 0;
+  overflow: clip;
+}
+
+.office-view {
+  overflow: clip;
 }
 
 button {
@@ -42,7 +47,7 @@ button {
   top: 50%;
   width: 1600px;
   height: 900px;
-  overflow: hidden;
+  overflow: clip;
   background: #000;
   transform-origin: 50% 50%;
 }
@@ -65,7 +70,7 @@ button {
 .scene {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .rain-layer {
@@ -121,7 +126,7 @@ button {
 .title-bg-wrap {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .title-bg {
@@ -375,7 +380,7 @@ button {
 .cs-shot {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  overflow: clip;
   will-change: transform, opacity;
 }
 
@@ -579,7 +584,7 @@ button {
   text-transform: uppercase;
   color: rgba(233, 228, 216, 0.35);
   padding: 6px 12px;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .skip-fill {
@@ -710,7 +715,7 @@ button {
 
 .office-doorway {
   position: absolute;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .seal-shutter {
@@ -719,7 +724,8 @@ button {
   right: 0;
   top: 0;
   height: 0;
-  background-size: 100% auto;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: 50% 100%;
   filter: brightness(0.5) contrast(1.1);
   transition: height 0.55s cubic-bezier(0.7, 0, 0.9, 0.6);
@@ -773,6 +779,18 @@ button {
   border: 2px solid rgba(240, 245, 255, 0.55);
   box-shadow: 0 0 10px rgba(220, 235, 255, 0.45), inset 0 0 8px rgba(220, 235, 255, 0.3);
   background: radial-gradient(ellipse, rgba(0, 0, 0, 0.95) 60%, transparent 72%);
+}
+
+.presence::after {
+  content: "";
+  position: absolute;
+  left: -70%;
+  right: -70%;
+  top: 70%;
+  height: 360%;
+  border-radius: 45% 45% 10% 10%;
+  background: radial-gradient(ellipse at 50% 20%, rgba(210, 220, 230, 0.09), transparent 65%);
+  filter: blur(6px);
 }
 
 @keyframes presence {
@@ -1001,11 +1019,15 @@ button {
   pointer-events: all;
 }
 
+.terminal {
+  place-items: start center;
+  padding-top: 22px;
+}
+
 .crt {
   position: relative;
-  width: 1460px;
-  height: 790px;
-  margin-top: -10px;
+  width: 1440px;
+  height: 704px;
   padding: 26px;
   border-radius: 34px;
   background: #15171a;
@@ -1018,7 +1040,7 @@ button {
   width: 100%;
   height: 100%;
   border-radius: 22px / 26px;
-  overflow: hidden;
+  overflow: clip;
   background: radial-gradient(ellipse at 50% 45%, #0b1512, #040706 80%);
   color: var(--phosphor);
   font-family: var(--mono);
@@ -1145,7 +1167,7 @@ button {
 
 .term-body {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .term-page {
@@ -1192,21 +1214,34 @@ button {
 
 .term-lower {
   position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(10, 12, 14, 0.7);
-  border: 1px solid rgba(233, 228, 216, 0.15);
-  padding: 7px 22px;
-  font-size: 12px;
+  bottom: 3px;
+  right: 60px;
+  height: 20px;
+  background: linear-gradient(#24272b, #18191c);
+  border: 1px solid #33373c;
+  border-radius: 3px;
+  padding: 0 14px;
+  font-size: 10px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(233, 228, 216, 0.6);
+  color: rgba(233, 228, 216, 0.5);
 }
 
 .term-lower:hover {
   color: #fff;
   border-color: rgba(233, 228, 216, 0.4);
+}
+
+.night:has(.terminal.open) .hud-top {
+  opacity: 0;
+}
+
+.night:has(.terminal.open) .hud-alert {
+  top: 2px;
+}
+
+.night:has(.terminal.open) .hud-toast {
+  top: 742px;
 }
 
 .terminal.locked .term-lower {
@@ -1216,11 +1251,15 @@ button {
 
 /* cameras */
 
+.page-cameras.active {
+  justify-content: center;
+}
+
 .feed {
   position: relative;
-  width: 1000px;
-  height: 562px;
-  overflow: hidden;
+  width: 868px;
+  height: 488px;
+  overflow: clip;
   background: #000;
   border: 1px solid var(--phosphor-faint);
   flex: none;
@@ -1229,7 +1268,7 @@ button {
 .feed-frame {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  overflow: clip;
 }
 
 .feed-image {
@@ -1314,8 +1353,8 @@ button {
 
 .cam-map {
   position: relative;
-  width: 440px;
-  height: 562px;
+  width: 380px;
+  height: 488px;
   flex: none;
   border: 1px solid var(--phosphor-faint);
   background: repeating-linear-gradient(0deg, rgba(169, 240, 207, 0.035) 0 1px, transparent 1px 22px),
@@ -1333,8 +1372,8 @@ button {
 
 .cam-map-office {
   position: absolute;
-  left: 160px;
-  top: 532px;
+  left: 130px;
+  top: 446px;
   width: 120px;
   height: 26px;
   display: flex;
@@ -1371,7 +1410,7 @@ button {
 
 .cam-room.corridor {
   justify-content: flex-start;
-  padding-top: 180px;
+  padding-top: 130px;
 }
 
 .cam-room.selected {
@@ -1413,7 +1452,7 @@ button {
   position: relative;
   width: 420px;
   flex: none;
-  overflow: hidden;
+  overflow: clip;
   border: 1px solid var(--phosphor-faint);
   background: #050807;
 }
@@ -1760,7 +1799,7 @@ button {
 .hold-button {
   position: relative;
   height: 96px;
-  overflow: hidden;
+  overflow: clip;
   border: 2px solid var(--phosphor);
   background: rgba(169, 240, 207, 0.05);
   font-family: var(--mono);
@@ -2277,7 +2316,7 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: sepia(0.6) hue-rotate(-20deg) saturate(1.4) brightness(1.35) contrast(0.95);
+  filter: sepia(0.7) hue-rotate(-25deg) saturate(1.6) brightness(1.7) contrast(0.9);
   transform: scale(1.08);
   animation: sc-pan 30s linear forwards;
 }
@@ -2291,7 +2330,7 @@ button {
 .sc-shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(40, 30, 40, 0.35), rgba(0, 0, 0, 0.85));
+  background: linear-gradient(180deg, rgba(255, 140, 80, 0.16), rgba(40, 20, 30, 0.35) 45%, rgba(0, 0, 0, 0.85));
 }
 
 .sc-card {

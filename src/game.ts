@@ -43,6 +43,16 @@ export class Game {
     container.append(this.stage);
     this.resize();
     window.addEventListener("resize", () => this.resize());
+    // Space and Enter are game keys; a button left focused by a click would also activate on them.
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        if (!(document.activeElement instanceof HTMLButtonElement)) return;
+        if (e.key === " " || e.key === "Enter") e.preventDefault();
+        document.activeElement.blur();
+      },
+      true,
+    );
     requestAnimationFrame((t) => this.loop(t));
     if (this.params.debug) (window as unknown as { __game: Game }).__game = this;
   }
